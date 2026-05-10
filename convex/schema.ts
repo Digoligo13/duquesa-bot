@@ -53,4 +53,13 @@ export default defineSchema({
     guildName: v.string(),
     blacklistedAt: v.optional(v.number()),
   }).index("by_guild", ["guildId"]),
+ 
+  counters: defineTable({
+    // Chave única: "guildId:channelId:trigger" — escopo por servidor+canal+nome
+    key: v.string(),
+    trigger: v.string(),
+    guildId: v.string(),
+    channelId: v.string(),
+    count: v.number(),
+  }).index("by_key", ["key"]),
 });
